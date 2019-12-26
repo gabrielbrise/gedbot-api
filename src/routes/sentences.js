@@ -1,8 +1,11 @@
 const express = require("express");
-const { getSentences } = require("../controllers/sentences");
+const { getSentences, addSentences } = require("../controllers/sentences");
 
 const router = express.Router();
 
-router.route("/").get(getSentences);
+router
+  .route("/")
+  .get(getSentences)
+  .post(addSentences);
 
 module.exports = router;
