@@ -12,6 +12,7 @@ connectDB();
 // Route files
 const sentences = require("./src/routes/sentences");
 const users = require("./src/routes/users");
+const votes = require("./src/routes/votes");
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use(express.json());
 // Mount routers
 app.use("/api/v1/sentences", sentences);
 app.use("/api/v1/users", users);
+app.use("/api/v1/votes", votes);
 
 const PORT = process.env.PORT || 5000;
 
