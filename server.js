@@ -13,8 +13,12 @@ connectDB();
 const sentences = require("./src/routes/sentences");
 const users = require("./src/routes/users");
 const votes = require("./src/routes/votes");
+const cors = require("cors");
 
 const app = express();
+
+// Enable CORS
+app.use(cors());
 
 // Body parser
 app.use(express.json());
