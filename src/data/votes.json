@@ -1,1 +1,57 @@
-{}
+[
+  {
+    "isPositive": true,
+    "user": "5e0c0eb9d41f0956cd694a90",
+    "sentence": "5e0bea031e4509559aa22090"
+  },
+  {
+    "isPositive": false,
+    "user": "5e0c0eb9d41f0956cd694a87",
+    "sentence": "5e0bea031e4509559aa22090"
+  },
+  {
+    "isPositive": false,
+    "user": "5e0c0eb9d41f0956cd694a88",
+    "sentence": "5e0bea031e4509559aa22090"
+  },
+  {
+    "isPositive": false,
+    "user": "5e0c0eb9d41f0956cd694a89",
+    "sentence": "5e0bea031e4509559aa22090"
+  },
+  {
+    "isPositive": true,
+    "user": "5e0c0eb9d41f0956cd694a8a",
+    "sentence": "5e0bea031e4509559aa22087"
+  },
+  {
+    "isPositive": true,
+    "user": "5e0c0eb9d41f0956cd694a8b",
+    "sentence": "5e0bea031e4509559aa22087"
+  },
+  {
+    "isPositive": true,
+    "user": "5e0c0eb9d41f0956cd694a8c",
+    "sentence": "5e0bea031e4509559aa22087"
+  },
+  {
+    "isPositive": true,
+    "user": "5e0c0eb9d41f0956cd694a8d",
+    "sentence": "5e0bea031e4509559aa22087"
+  },
+  {
+    "isPositive": true,
+    "user": "5e0c0eb9d41f0956cd694a8e",
+    "sentence": "5e0bea031e4509559aa22094"
+  },
+  {
+    "isPositive": true,
+    "user": "5e0c0eb9d41f0956cd694a8f",
+    "sentence": "5e0bea031e4509559aa22094"
+  },
+  {
+    "isPositive": false,
+    "user": "5e0c0eb9d41f0956cd694a90",
+    "sentence": "5e0bea031e4509559aa22094"
+  }
+]
