@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const VoteSchema = new mongoose.Schema({
-  is_positive: Boolean,
+  isPositive: Boolean,
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User"
@@ -22,7 +22,7 @@ VoteSchema.statics.getScore = async function(sentenceId) {
     {
       $group: {
         _id: "$sentence",
-        score: { $sum: { $cond: ["$is_positive", 1, -1] } }
+        score: { $sum: { $cond: ["$isPositive", 1, -1] } }
       }
     }
   ]);
