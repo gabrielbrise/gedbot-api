@@ -7,8 +7,8 @@ const SentenceSchema = new mongoose.Schema({
     max: [3, "Position must be 1, 2 or 3"]
   },
   text: String,
-  score: Number,
-  isApproved: Boolean
+  score: { type: Number, default: 0 },
+  isApproved: { type: Boolean, default: false }
 });
 
 // Cascade delete courses when a bootcamp is deleted
