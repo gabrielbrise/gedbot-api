@@ -26,6 +26,20 @@ VoteSchema.statics.getScore = async function(sentenceId) {
       }
     }
   ]);
+  if (obj[0].score >= process.env.SCORE_APPROVED) {
+    try {
+      return await this.model("Sentence").findByIdAndUpdate(sentenceId, {
+        score: obj[0].score,
+        isApproved: true
+      });
+    } catch (error) {
+      return console.error(error);
+    }
+  }
+  if (obj[0].score <= process.env.SCORE_REJECTED) {
+    console.log("deletando sentenca rejeitada");
+    await this.model("Sentence").findByIdAndDelete(sentenceId);
+  }
   try {
     await this.model("Sentence").findByIdAndUpdate(sentenceId, {
       score: obj[0].score
