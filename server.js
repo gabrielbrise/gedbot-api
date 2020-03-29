@@ -20,6 +20,9 @@ const app = express();
 // Enable CORS
 app.use(cors());
 
+// Trust proxy
+app.set("trust proxy", true);
+
 // Body parser
 app.use(express.json());
 
