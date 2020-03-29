@@ -28,7 +28,7 @@ exports.getSentences = asyncHandler(async (req, res, next) => {
   const userVotesSentencesisPositive = userVotes.map(vote => vote.isPositive);
 
   if (userVotes) {
-    sentences = sentences.map((sentence, index) => {
+    sentences = sentences.map(sentence => {
       if (userVotesSentencesIds.includes(sentence._id.toString())) {
         return {
           score: sentence.score,
@@ -38,7 +38,10 @@ exports.getSentences = asyncHandler(async (req, res, next) => {
           text: sentence.text,
           __v: sentence.__v,
           isVoted: true,
-          isPositive: userVotesSentencesisPositive[index]
+          isPositive:
+            userVotesSentencesisPositive[
+              userVotesSentencesIds.indexOf(sentence_.id.toString())
+            ]
         };
       }
       return sentence;
