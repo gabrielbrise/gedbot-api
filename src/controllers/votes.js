@@ -2,6 +2,7 @@ const asyncHandler = require("../middleware/async");
 const User = require("../models/User");
 const Vote = require("../models/Vote");
 const Sentence = require("../models/Sentence");
+const crypto = require("crypto");
 const ErrorResponse = require("../utils/errorResponse");
 
 // @desc      Set user vote
@@ -32,7 +33,7 @@ exports.addVote = asyncHandler(async (req, res, next) => {
     user = await User.create({ ip });
   }
 
-  req.body.user = user;
+  req.body.user = user._id;
 
   const vote = await Vote.create(req.body);
 

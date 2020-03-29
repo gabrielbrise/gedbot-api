@@ -9,7 +9,6 @@ const crypto = require("crypto");
 // @access    Public
 exports.getSentences = asyncHandler(async (req, res, next) => {
   let sentences = await Sentence.find();
-  const votes = await Vote.find();
   const ip = crypto
     .createHash("sha256")
     .update(req.ip)
@@ -21,15 +20,23 @@ exports.getSentences = asyncHandler(async (req, res, next) => {
     user = await User.create({ ip });
   }
 
-  const userVotes = votes.filter(vote => vote.user === user._id);
-  const userVotesSentencesIds = userVotes.map(vote => vote.sentence);
+  const userVotes = await Vote.find({ user: user._id });
+  const userVotesSentencesIds = userVotes.map(vote =>
+    vote.sentence._id.toString()
+  );
+
   const userVotesSentencesisPositive = userVotes.map(vote => vote.isPositive);
 
   if (userVotes) {
     sentences = sentences.map((sentence, index) => {
-      if (userVotesSentencesIds.includes(sentence._id)) {
+      if (userVotesSentencesIds.includes(sentence._id.toString())) {
         return {
-          ...sentences,
+          score: sentence.score,
+          isApproved: sentence.isApproved,
+          _id: sentence._id,
+          position: sentence.position,
+          text: sentence.text,
+          __v: sentence.__v,
           isVoted: true,
           isPositive: userVotesSentencesisPositive[index]
         };
