@@ -8,28 +8,6 @@ const ErrorResponse = require("../utils/errorResponse");
 // @route     POST /api/v1/sentences/:sentenceId/vote
 // @access    Public
 exports.addVote = asyncHandler(async (req, res, next) => {
-  // const { user_id } = req.headers;
-  // const { sentence_id } = req.params;
-  // const { is_positive } = req.query;
-
-  // let vote = await Vote.findOne({ user_id, sentence_id });
-
-  // if (!vote) {
-  //   vote = await Vote.create({
-  //     user: user_id,
-  //     sentence: sentence_id,
-  //     is_positive
-  //   });
-
-  //   await vote
-  //     .populate("user")
-  //     .populate("sentence")
-  //     .execPopulate();
-  // }
-
-  // const sentences = req.body.sentences;
-
-  // await sentences.map(sentence => Sentence.create(sentence));
   req.body.sentence = req.params.sentenceId;
 
   const sentence = await Sentence.findById(req.params.sentenceId);
@@ -43,7 +21,12 @@ exports.addVote = asyncHandler(async (req, res, next) => {
     );
   }
 
-  const user = await User.findOne({ ip: req.ip });
+  const ip = crypto
+    .createHash("sha256")
+    .update(req.ip)
+    .digest("hex");
+
+  const user = await User.findOne({ ip });
 
   req.body.user = user;
 
