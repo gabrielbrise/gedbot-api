@@ -1,5 +1,6 @@
 const asyncHandler = require("../middleware/async");
 const User = require("../models/User");
+const crypto = require("crypto");
 
 // @desc      Get user
 // @route     GET /api/v1/users/:id
@@ -7,11 +8,16 @@ const User = require("../models/User");
 exports.getUser = asyncHandler(async (req, res, next) => {
   const ip = req.ip;
 
-  let user = await User.findOne({ ip });
+  const IpToken = crypto
+    .createHash("sha256")
+    .update(ip)
+    .digest("hex");
+
+  let user = await User.findOne({ ip: ipToken });
 
   if (!user) {
     user = await User.create({
-      ip: ip
+      ip: ipToken
     });
   }
 
