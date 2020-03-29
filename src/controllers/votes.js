@@ -26,7 +26,11 @@ exports.addVote = asyncHandler(async (req, res, next) => {
     .update(req.ip)
     .digest("hex");
 
-  const user = await User.findOne({ ip });
+  let user = await User.findOne({ ip });
+
+  if (!user) {
+    user = await User.create({ ip });
+  }
 
   req.body.user = user;
 
