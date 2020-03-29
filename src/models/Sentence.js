@@ -13,9 +13,17 @@ const SentenceSchema = new mongoose.Schema({
 
 // Cascade delete courses when a bootcamp is deleted
 SentenceSchema.pre("remove", async function(next) {
-  console.log(`Votes being removed from sentence ${this._id}`);
+  console.log(`Votes being removed from deleted sentence ${this._id}`);
   await this.model("Vote").deleteMany({ sentence: this._id });
   next();
+});
+
+SentenceSchema.post("save", async function(next) {
+  if (this.isApproved === true) {
+    console.log(`Votes being removed from approved sentence ${this._id}`);
+    await this.model("Vote").deleteMany({ sentence: this._id });
+    next();
+  }
 });
 
 module.exports = mongoose.model("Sentence", SentenceSchema);

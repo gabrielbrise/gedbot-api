@@ -58,8 +58,27 @@ const deleteData = async () => {
   }
 };
 
+// Clean votes for approved sentences
+const cleanVotes = async () => {
+  try {
+    const approvedSentences = await Sentence.find({ isApproved: true });
+
+    const approvedSentencesIds = approvedSentences.map(
+      sentence => sentence._id
+    );
+
+    await Promise.all(
+      approvedSentencesIds.map(id => Vote.deleteMany({ sentence: id }))
+    );
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 if (process.argv[2] === "-i") {
   importData();
 } else if (process.argv[2] === "-d") {
   deleteData();
+} else if (process.argv[2] === "-c") {
+  cleanVotes();
 }
