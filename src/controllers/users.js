@@ -14,7 +14,7 @@ exports.getUser = asyncHandler(async (req, res, next) => {
   let user = await User.findOne({ ip });
 
   if (!user) {
-    user = await User.create({ ip });
+    user = await User.create({ ip: ip });
   }
 
   return res.status(200).json(user);
