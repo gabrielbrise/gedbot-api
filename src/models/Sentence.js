@@ -18,8 +18,8 @@ SentenceSchema.pre("remove", async function(next) {
   next();
 });
 
-SentenceSchema.post("save", async function(next) {
-  if (this.isApproved === true) {
+SentenceSchema.post("findByIdAndUpdate", async function(next) {
+  if (this.isApproved) {
     console.log(`Votes being removed from approved sentence ${this._id}`);
     await this.model("Vote").deleteMany({ sentence: this._id });
     next();
