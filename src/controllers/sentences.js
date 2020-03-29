@@ -40,7 +40,7 @@ exports.getSentences = asyncHandler(async (req, res, next) => {
           isVoted: true,
           isPositive:
             userVotesSentencesisPositive[
-              userVotesSentencesIds.indexOf(sentence_.id.toString())
+              userVotesSentencesIds.indexOf(sentence._id.toString())
             ]
         };
       }
