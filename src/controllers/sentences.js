@@ -9,15 +9,21 @@ const crypto = require("crypto");
 // @access    Public
 exports.getSentences = asyncHandler(async (req, res, next) => {
   let sentences = await Sentence.find();
+
   const ip = crypto
     .createHash("sha256")
     .update(req.ip)
     .digest("hex");
 
-  let user = await User.findOne({ ip });
+  const userAgent = crypto
+    .createHash("sha256")
+    .update(req.headers["user-agent"])
+    .digest("hex");
+
+  let user = await User.findOne({ ip, userAgent });
 
   if (!user) {
-    user = await User.create({ ip });
+    user = await User.create({ ip, userAgent });
   }
 
   const userVotes = await Vote.find({ user: user._id });
